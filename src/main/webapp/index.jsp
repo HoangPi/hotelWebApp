@@ -152,7 +152,7 @@
             </div>
 
             <div class="col-md probootstrap-animate">
-                <form action="#" class="probootstrap-form">
+                <form action="Booking" method="get" class="probootstrap-form">
                     <div class="form-group">
                         <div class="row mb-3">
                             <div class="col-md">
@@ -160,45 +160,23 @@
                                     <label for="id_label_single">From</label>
 
                                     <label for="id_label_single" style="width: 100%;">
-                                        <select
+                                        <select name = "room_option"
                                                 class="js-example-basic-single js-states form-control"
                                                 id="id_label_single" style="width: 100%;">
-                                            <option value="type1">Deluxe Double Lake View</option>
-                                            <option value="type2">Deluxe Single Balcony</option>
-                                            <option value="type3">Deluxe Double Balcony</option>
-                                            <option value="type4">Signature Balcony</option>
-                                            <option value="type5">Junior Suite Courtyard</option>
-                                            <option value="type6">Junior Suite Courtyard Twin</option>
-                                            <option value="type7">Courtyard Suite</option>
-                                            <option value="type8">Lake View Suite</option>
-                                            <option value="type9">Celebrity Suite</option>
-                                            <option value="type10">Senator Suite</option>
+                                            <option value="1">Deluxe Double Lake View</option>
+                                            <option value="2">Deluxe Single Balcony</option>
+                                            <option value="3">Deluxe Double Balcony</option>
+                                            <option value="4">Signature Balcony</option>
+                                            <option value="5">Junior Suite Courtyard</option>
+                                            <option value="6">Junior Suite Courtyard Twin</option>
+                                            <option value="7">Courtyard Suite</option>
+                                            <option value="8">Lake View Suite</option>
+                                            <option value="9">Celebrity Suite</option>
+                                            <option value="10">Senator Suite</option>
                                         </select>
                                     </label>
 
 
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <div class="form-group">
-                                    <label for="id_label_single2">To</label>
-                                    <div class="probootstrap_select-wrap">
-                                        <label for="id_label_single2" style="width: 100%;">
-                                            <select class="js-example-basic-single js-states form-control" id="id_label_single2" style="width: 100%;">
-                                                <option value="Australia">1</option>
-                                                <option value="Japan">2</option>
-                                                <option value="United States">3</option>
-                                                <option value="Brazil">4</option>
-                                                <option value="China">5</option>
-                                                <option value="Israel">6</option>
-                                                <option value="Philippines">7</option>
-                                                <option value="Malaysia">8</option>
-                                                <option value="Canada">9</option>
-                                                <option value="Chile">10</option>
-                                                <option value="Chile">Zimbabwe</option>
-                                            </select>
-                                        </label>
-                                    </div>
                                 </div>
                             </div>
                         </div>
