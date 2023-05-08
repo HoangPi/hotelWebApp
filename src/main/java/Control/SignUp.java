@@ -1,4 +1,4 @@
-package Account;
+package Control;
 
 import business.User;
 import database.UserDatabase;
@@ -6,8 +6,6 @@ import database.UserDatabase;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.swing.plaf.nimbus.State;
-import javax.xml.transform.Result;
 import java.io.IOException;
 //import java.sql.Connection;
 import java.sql.*;

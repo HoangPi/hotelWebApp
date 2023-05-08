@@ -1,4 +1,4 @@
-package Account;
+package Control;
 
 import business.User;
 import database.UserDatabase;
