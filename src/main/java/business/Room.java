@@ -15,7 +15,7 @@ public class Room implements Serializable{
     @Column(name = "type")
     private int Type;
     @Column(name = "available")
-    private int Available;
+    private byte Available;
 
     public int getNumber() {
         return Number;
@@ -25,7 +25,14 @@ public class Room implements Serializable{
         return Type;
     }
 
-    public int getAvailable() {
+    public byte getAvailable() {
         return Available;
     }
+    public Room(int type, int number, byte available)
+    {
+        this.Type = type;
+        this.Number = number;
+        this.Available = available;
+    }
+    public Room(){}
 }

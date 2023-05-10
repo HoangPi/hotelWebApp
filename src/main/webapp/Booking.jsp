@@ -1,4 +1,7 @@
-<%--
+<%@ page import="business.Room" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="static jdk.internal.org.jline.reader.impl.LineReaderImpl.CompletionType.List" %><%--
   Created by IntelliJ IDEA.
   User: hoang
   Date: 5/8/2023
@@ -10,7 +13,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Refresh" content="4; url='index.jsp'" />
+    <%
+        if(request.getAttribute("booking_message")!=null)
+        {
+            %><meta http-equiv="Refresh" content="4; url='index.jsp'" /><%
+        }
+    %>
+
     <title>Places &mdash; Free HTML5 Bootstrap 4 Theme by uicookies.com</title>
     <meta name="description" content="Free Bootstrap 4 Theme by uicookies.com">
     <meta name="keywords"
@@ -76,8 +85,18 @@
             margin: auto;
         }
     </style>
-    <p class = "inform"><i><b>There Are Currently No Available Rooms That Match Your Type, Sorry For The Discomfort, You
-    Will Be Redirected To The Home Page Soon</b><br></i></p>
+    <p class = "inform"><i><b>${booking_message}</b><br></i></p>
+    <table>
+        <tr>
+            <th>Room number</th>
+            <th></th>
+        </tr>
+        <c:forEach var = "r" items="${rooms}">
+            <td><c:out value = "${r.getNumber()}"/></td>
+            <td></td>
+        </c:forEach>
+    </table>
+
 </section>
 
 

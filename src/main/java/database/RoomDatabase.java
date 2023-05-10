@@ -6,19 +6,22 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RoomDatabase {
-    public static List<RoomInfo> getAllRoomInfo()
+    public static ArrayList<RoomInfo> getAllRoomInfo()
     {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         String query = "SELECT i FROM RoomInfo i";
         TypedQuery<RoomInfo> r = em.createQuery(query, RoomInfo.class);
-        List<RoomInfo> listRoomInfos;
+        ArrayList<RoomInfo> listRoomInfos;
         try
         {
-            listRoomInfos = r.getResultList();
+            List<RoomInfo> temp = r.getResultList();
+            listRoomInfos = new ArrayList<RoomInfo>(temp);
             if(listRoomInfos == null || listRoomInfos.isEmpty()) listRoomInfos = null;
         }
         finally {
@@ -26,15 +29,15 @@ public class RoomDatabase {
         }
         return listRoomInfos;
     }
-    public static List<Room> getAllRoom()
+    public static ArrayList<Room> getAllRoom()
     {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         String query = "SELECT i FROM Room i";
         TypedQuery<Room> r = em.createQuery(query, Room.class);
-        List<Room> Rooms;
+        ArrayList<Room> Rooms;
         try{
-            Rooms = r.getResultList();
+            Rooms = new ArrayList<Room>(r.getResultList());
             if(Rooms==null || Rooms.isEmpty()) Rooms = null;
         }
         finally {
@@ -42,15 +45,15 @@ public class RoomDatabase {
         }
         return Rooms;
     }
-    public static List<Room> getAllRoomByType(int type)
+    public static ArrayList<Room> getAllRoomByType(byte type)
     {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         String query = "SELECT i FROM Room i WHERE i.Type = :type";
         TypedQuery<Room> r = em.createQuery(query,Room.class);
-        List<Room> Rooms;
+        ArrayList<Room> Rooms;
         try{
-            Rooms = r.getResultList();
+            Rooms = new ArrayList<Room>(r.getResultList());
             if(Rooms==null || Rooms.isEmpty()) Rooms = null;
         }
         finally {
@@ -58,15 +61,15 @@ public class RoomDatabase {
         }
         return Rooms;
     }
-    public static List<Room> getAllAvailableRoomByType(int type)
+    public static ArrayList<Room> getAllAvailableRoomByType(byte type)
     {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        String query = "SELECT i FROM Room i WHERE i.Type = :type AND i.Available = 1";
+        String query = "SELECT i FROM Room i WHERE i.Type = " + String.valueOf(type)+" AND i.Available = 1";
         TypedQuery<Room> r = em.createQuery(query,Room.class);
-        List<Room> Rooms;
+        ArrayList<Room> Rooms;
         try{
-            Rooms = r.getResultList();
+            Rooms = new ArrayList<Room>(r.getResultList());
             if(Rooms==null || Rooms.isEmpty()) Rooms = null;
         }
         finally {
