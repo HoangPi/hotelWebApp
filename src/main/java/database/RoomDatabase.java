@@ -11,6 +11,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RoomDatabase {
+    public static RoomInfo getRoomInfoByType(byte type)
+    {
+        EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
+        RoomInfo room;
+        try{
+            room = em.find(RoomInfo.class,type);
+        }
+        finally {
+            em.close();
+        }
+        return room;
+    }
     public static ArrayList<RoomInfo> getAllRoomInfo()
     {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();

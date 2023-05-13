@@ -3,6 +3,7 @@
 <%@ page import="database.RoomDatabase" %>
 <%@ page import="java.util.List" %>
 <%@ page import="business.RoomInfo" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,8 +98,15 @@
                 <li>
                     <a href="#">Hello ${sessionScope.get("user").getFirstName()}</a>
                     <ul class = "dropdown">
-                        <li><a href="#">Personal Information</a></li>
-                        <li><a href="#">Log Out</a></li>
+                        <li>
+                            <a href="/Control/LogOut" accesskey="1" title="">Personal Information</a>
+                        </li>
+                        <li>
+                            <form action="LogOut" method="get">
+                                <input type="hidden" name="action" value="log out">
+                                <input type="submit" style="background:rgba(0,0,0,0.5);" value="Log Out">
+                            </form>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -157,6 +165,7 @@
                         <div class="row mb-3">
                             <div class="col-md">
                                 <div class="form-group">
+                                    <p style = "color:#5897fb"><i><b>${bookingMessage} </b><br></i></p>
                                     <label for="id_label_single">From</label>
 
                                     <label for="id_label_single" style="width: 100%;">
@@ -184,19 +193,19 @@
                         <div class="row mb-5">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="probootstrap-date-departure">Departure</label>
+                                    <label for="probootstrap-date-departure">Arrival Date</label>
                                     <div class="probootstrap-date-wrap">
                                         <span class="icon ion-calendar"></span>
-                                        <input type="text" id="probootstrap-date-departure" class="form-control" placeholder="">
+                                        <input name = "Date_In" type="text" id="probootstrap-date-departure" class="form-control" placeholder="">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="probootstrap-date-arrival">Arrival</label>
+                                    <label for="probootstrap-date-arrival">Check Out Date</label>
                                     <div class="probootstrap-date-wrap">
                                         <span class="icon ion-calendar"></span>
-                                        <input type="text" id="probootstrap-date-arrival" class="form-control" placeholder="">
+                                        <input name = "Date_Out" type="text" id="probootstrap-date-arrival" class="form-control" placeholder="">
                                     </div>
                                 </div>
                             </div>
