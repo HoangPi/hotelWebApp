@@ -1,5 +1,6 @@
 <%@ page import="business.Room" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="static java.util.Objects.toString" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@ page import="static jdk.internal.org.jline.reader.impl.LineReaderImpl.CompletionType.List" %>--%>
 <%--
@@ -69,7 +70,7 @@
 </nav>
 <%--End nav--%>
 <section class="ftco-section">
-    <form class="mainform" action="/Booking" method="post" class="probootstrap-form probootstrap-form-box mb60">
+    <form class="mainform" action="Booking" method="post" class="probootstrap-form probootstrap-form-box mb60">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-4">
@@ -95,12 +96,14 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <%int i = 0;%>
                             <c:forEach var="r" items="${requestScope.rooms}">
                                 <tr class="alert" role="alert">
                                     <td>
                                         <label class="checkbox-wrap checkbox-primary">
-                                            <input type="checkbox">
+                                            <input type="checkbox" name=<c:out value="${r.getNumber()}"/>>
                                             <span class="checkmark"></span>
+                                            <%i++;%>
                                         </label>
                                     </td>
                                     <td><c:out value="${r.getNumber()}"/></td>

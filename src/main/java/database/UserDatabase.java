@@ -39,6 +39,7 @@ public class UserDatabase {
             catch(Exception ex)
             {
                 trans.rollback();
+                return false;
             }
             finally {
                 em.close();
@@ -46,6 +47,28 @@ public class UserDatabase {
             }
         }
         return false;
+    }
+    public static boolean changePassword(String username, String newpassword)
+    {
+        User user = getUserByUsername(username);
+        user.setPassword(newpassword);
+        EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try
+        {
+            trans.begin();
+            em.merge(user);
+            trans.commit();
+        }
+        catch (Exception ex)
+        {
+            trans.rollback();
+            return false;
+        }
+        finally {
+            em.close();
+            return true;
+        }
     }
     public static User getUserByUsername(String username)
     {

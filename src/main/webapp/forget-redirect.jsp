@@ -10,7 +10,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Refresh" content="4; url='https://mail.google.com'" />
+<%--    <meta http-equiv="Refresh" content="4; url='https://mail.google.com'" />--%>
+    <meta http-equiv="Refresh" content="4; url='ResetPassword.jsp'" />
     <title>Places &mdash; Free HTML5 Bootstrap 4 Theme by uicookies.com</title>
     <meta name="description" content="Free Bootstrap 4 Theme by uicookies.com">
     <meta name="keywords"

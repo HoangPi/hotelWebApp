@@ -75,9 +75,9 @@
             margin: auto;
         }
     </style>
-    <form class="mainform" action="logIn" method="post" class="probootstrap-form probootstrap-form-box mb60">
+    <form class="mainform" action="ForgetPassword" method="post" class="probootstrap-form probootstrap-form-box mb60">
         <input type="hidden" name="action" value="forget">
-        <p style="color:#5897fb"><i><b>${message} </b><br></i></p>
+        <p style="color:#5897fb"><i><b>${forgetMessage} </b><br></i></p>
 
         <div class="form-group">
             <label for="userName" class="sr-only sr-only-focusable">User name</label>

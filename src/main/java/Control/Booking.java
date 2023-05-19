@@ -2,8 +2,11 @@ package Control;
 
 import business.Room;
 import business.RoomInfo;
+import business.User;
 import database.InvoiceDataBase;
 import database.RoomDatabase;
+import jakarta.ejb.Local;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static java.lang.Byte.parseByte;
+import static java.lang.Byte.valueOf;
 import static java.lang.Integer.parseInt;
 
 @WebServlet(name = "Booking", value = "/Booking")
@@ -109,9 +113,16 @@ public class Booking extends HttpServlet {
         }
         else
         {
-            RoomInfo inform = RoomDatabase.getRoomInfoByType(parseByte(option));
-            request.setAttribute("rooms",rooms);
-            request.setAttribute("price",String.valueOf(inform.getPrice()));
+            final Object lock = request.getSession().getId().intern();
+            synchronized (lock){
+                session.setAttribute("Date_In",in);
+                session.setAttribute("Date_Out",out);
+
+                session.setAttribute("rooms",rooms);
+                RoomInfo inform = RoomDatabase.getRoomInfoByType(parseByte(option));
+                request.setAttribute("rooms",rooms);
+                request.setAttribute("price",String.valueOf(inform.getPrice()));
+            }
             getServletContext()
                     .getRequestDispatcher("/booking.jsp")
                     .forward(request,response);
@@ -120,8 +131,42 @@ public class Booking extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ArrayList<Room> rooms = (ArrayList<Room>)(session.getAttribute("rooms"));
+        for(int i =0;i<rooms.size();i++)
+        {
+            String num = String.valueOf(rooms.get(i).getNumber());
+            String check = request.getParameter(num);
+            if(check != null && check.equals("on"))
+            {
+                if(!InvoiceDataBase.checkValid(Integer.parseInt(num),(LocalDate)session.getAttribute("Date_In"),
+                    (LocalDate)session.getAttribute("Date_Out")))
+                {
+                    request.setAttribute("bookingMessage","Unexpected Error, Please Try Again");
+                    getServletContext()
+                            .getRequestDispatcher("/index.jsp")
+                            .forward(request,response);
+                    return;
+                }
+                User temp = (User)session.getAttribute("user");
+                if(!InvoiceDataBase.addInvoice(temp.getUserName(),Integer.parseInt(num),
+                        (LocalDate)session.getAttribute("Date_In"),(LocalDate)session.getAttribute("Date_Out")))
+                {
+                    request.setAttribute("bookingMessage","Unexpected Error, Please Try Again");
+                    request.setAttribute("di",request.getAttribute("Date_In"));
+                    request.setAttribute("do",request.getAttribute("Date_Out"));
+                    getServletContext()
+                            .getRequestDispatcher("/index.jsp")
+                            .forward(request,response);
+                    return;
+                }
+            }
+        }
+        request.setAttribute("bookingMessage","Room Added To Your Cart, You Can Review It In The Personal Information");
+        request.setAttribute("di",request.getAttribute("Date_In"));
+        request.setAttribute("do",request.getAttribute("Date_Out"));
         getServletContext()
-                .getRequestDispatcher("/log-in.jsp")
+                .getRequestDispatcher("/index.jsp")
                 .forward(request,response);
     }
     public DateTimeFormatter setFormatByString(String date)

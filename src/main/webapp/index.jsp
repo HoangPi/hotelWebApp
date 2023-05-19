@@ -99,13 +99,10 @@
                     <a href="#">Hello ${sessionScope.get("user").getFirstName()}</a>
                     <ul class = "dropdown">
                         <li>
-                            <a href="/Control/LogOut" accesskey="1" title="">Personal Information</a>
+                            <a href="PersonalInfo">Personal Information</a>
                         </li>
                         <li>
-                            <form action="LogOut" method="get">
-                                <input type="hidden" name="action" value="log out">
-                                <input type="submit" style="background:rgba(0,0,0,0.5);" value="Log Out">
-                            </form>
+                            <a href="LogOut">Log Out</a>
                         </li>
                     </ul>
                 </li>
