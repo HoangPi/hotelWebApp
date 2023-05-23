@@ -102,6 +102,9 @@
                             <a href="PersonalInfo">Personal Information</a>
                         </li>
                         <li>
+                            <a href="PurchaseHistoryControl">Purchase History</a>
+                        </li>
+                        <li>
                             <a href="LogOut">Log Out</a>
                         </li>
                     </ul>
@@ -157,7 +160,7 @@
             </div>
 
             <div class="col-md probootstrap-animate">
-                <form action="Booking" method="get" class="probootstrap-form">
+                <form action="BookingControl" method="get" class="probootstrap-form">
                     <div class="form-group">
                         <div class="row mb-3">
                             <div class="col-md">
@@ -209,10 +212,10 @@
                         </div>
                         <!-- END row -->
                         <div class="row">
-                            <div class="col-md">
-                                <label for="round" class="mr-5"><input type="radio" id="round" name="direction">  Round</label>
-                                <label for="oneway"><input type="radio" id="oneway" name="direction">  Oneway</label>
-                            </div>
+<%--                            <div class="col-md">--%>
+<%--                                <label for="round" class="mr-5"><input type="radio" id="round" name="direction">  Round</label>--%>
+<%--                                <label for="oneway"><input type="radio" id="oneway" name="direction">  Oneway</label>--%>
+<%--                            </div>--%>
                             <div class="col-md">
                                 <input type="submit" value="Submit" class="btn btn-primary btn-block">
                             </div>

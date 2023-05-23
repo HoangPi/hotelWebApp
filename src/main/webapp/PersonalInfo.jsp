@@ -110,17 +110,17 @@
                   <tr class="alert" role="alert">
                     <td>
                       <label class="checkbox-wrap checkbox-primary">
-                        <input type="checkbox" name=<c:out value="${r.getInvoice().getID()}"/>>
+                        <input type="checkbox" name=<c:out value="${r.getID()}"/>>
                         <span class="checkmark"></span>
                       </label>
                     </td>
-                    <td><c:out value="${r.getInvoice().getID()}"/></td>
-                    <td><c:out value="${r.getName()}"/></td>
-                    <td><c:out value="${r.getInvoice().getRoom()}"/></td>
-                    <td><c:out value="${r.getPrice()}"/></td>
-                    <td><c:out value="${r.getInvoice().getDateIn()}"/></td>
-                    <td><c:out value="${r.getInvoice().getDateOut()}"/></td>
-                    <td><c:out value="${r.getCost()}"/></td>
+                    <td><c:out value="${r.getID()}"/></td>
+                    <td><c:out value="${r.getRoomInfo().getName()}"/></td>
+                    <td><c:out value="${r.getRoomNumber()}"/></td>
+                    <td><c:out value="${r.getRoomInfo().getPrice()}"/></td>
+                    <td><c:out value="${r.getDatein()}"/></td>
+                    <td><c:out value="${r.getDateout()}"/></td>
+                    <td><c:out value="${r.CalculateFee()}"/></td>
                   </tr>
                 </c:if>
               </c:forEach>

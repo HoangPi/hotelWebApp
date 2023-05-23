@@ -1,5 +1,6 @@
 package Control;
 
+import business.Booking;
 import business.Invoice;
 import business.ItemLine;
 import business.User;
@@ -18,12 +19,12 @@ public class PersonalInfo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
-        ArrayList<ItemLine> itemLines = (InvoiceDataBase.getInvoiceByUsername(user.getUserName()));
+        ArrayList<Booking> bookings = InvoiceDataBase.getAllBookingByUserName(user.getUserName());
 
         final Object lock = request.getSession().getId().intern();
         synchronized (lock){
-            request.setAttribute("itemLines",itemLines);
-            session.setAttribute("itemLines",itemLines);
+            request.setAttribute("itemLines",bookings);
+            session.setAttribute("itemLines",bookings);
             session.removeAttribute("user");
             session.setAttribute("user",user);
             request.setAttribute("user",user);

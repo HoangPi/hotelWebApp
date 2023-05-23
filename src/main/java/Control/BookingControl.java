@@ -1,31 +1,27 @@
 package Control;
 
+import business.Booking;
 import business.Room;
 import business.RoomInfo;
 import business.User;
 import database.InvoiceDataBase;
 import database.RoomDatabase;
-import jakarta.ejb.Local;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static java.lang.Byte.parseByte;
 import static java.lang.Byte.valueOf;
 import static java.lang.Integer.parseInt;
 
-@WebServlet(name = "Booking", value = "/Booking")
-public class Booking extends HttpServlet {
+@WebServlet(name = "BookingControl", value = "/BookingControl")
+public class BookingControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        request.setAttribute("booking_message","No room");
@@ -149,8 +145,9 @@ public class Booking extends HttpServlet {
                     return;
                 }
                 User temp = (User)session.getAttribute("user");
-                if(!InvoiceDataBase.addInvoice(temp.getUserName(),Integer.parseInt(num),
-                        (LocalDate)session.getAttribute("Date_In"),(LocalDate)session.getAttribute("Date_Out")))
+                Booking b = new Booking(temp.getUserName(),Integer.parseInt(num),
+                        (LocalDate)session.getAttribute("Date_In"),(LocalDate)session.getAttribute("Date_Out"));
+                if(!InvoiceDataBase.addBooking(b))
                 {
                     request.setAttribute("bookingMessage","Unexpected Error, Please Try Again");
                     request.setAttribute("di",request.getAttribute("Date_In"));
