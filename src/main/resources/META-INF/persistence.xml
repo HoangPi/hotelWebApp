@@ -7,9 +7,10 @@
         <properties>
             <property name ="hibernate.connection.driver" value = "com.mysql.cj.jdbc.Driver"/>
 <!--            <property name="hibernate.connection.url" value="jdbc:mysql://awseb-e-jpfsrsd6cj-stack-awsebrdsdatabase-r2wz1elshkqd.cilvjuklbw8d.ap-northeast-1.rds.amazonaws.com:3306/hotel"/>-->
-            <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/hotel"/>
-            <property name="hibernate.connection.user" value="root"/>
-            <property name="hibernate.connection.password" value="Hoangphi09#"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://127.0.0.1:3306/whateve1_hotel"/>
+<!--            <property name="hibernate.connection.user" value="root"/>-->
+            <property name="hibernate.connection.user" value="whateve1_root"/>
+            <property name="hibernate.connection.password" value="+ojRGW397)-)"/>
             <property name="hibernate.hbm2ddl.auto"
                       value="update" />
         </properties>

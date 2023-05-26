@@ -77,7 +77,7 @@
             margin: auto;
         }
     </style>
-    <p class = "inform"><i><b>You Will Be Redirect To Your Email Soon </b><br></i></p>
+    <p class = "inform"><i><b>Hang On While We Are Redirecting You</b><br></i></p>
 </section>
 
 

@@ -100,7 +100,7 @@
                 <th>4</th>
                 <th>5</th>
                 <th>6</th>
-                <th>7 = (Today - 5) * 4 + (6 - Today) * 4 * 0.2</th>
+                <th>7 = (Today - 5) * 4 + (6 - Today) * 4 * 0.1</th>
               </tr>
               </thead>
               <tbody>
