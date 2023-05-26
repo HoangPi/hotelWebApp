@@ -1,6 +1,8 @@
 package database;
 
+import Control.PurchaseHistoryControl;
 import business.*;
+import jakarta.faces.push.Push;
 import jakarta.mail.FetchProfile;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -18,17 +20,18 @@ public class InvoiceDataBase {
     {
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        String query = "SELECT i FROM Invoice i " +
-                "WHERE i.dateIn <= ?1 " +
-                "and i.room = ?2 " +
-                "and i.dateOut >= ?3";
-        TypedQuery<Invoice> r = em.createQuery(query,Invoice.class);
+        String query = "SELECT i FROM Booking i " +
+                "WHERE i.datein <= ?1 " +
+                "and i.roomNumber = ?2 " +
+                "and i.dateout >= ?3";
+        TypedQuery<Booking> r = em.createQuery(query,Booking.class);
         r.setParameter(3,datein);
         r.setParameter(2, roomNumber);
         r.setParameter(1,dateout);
-        ArrayList<Invoice> invoice = new ArrayList<Invoice>(r.getResultList());
-        if(invoice==null || invoice.isEmpty()) return true;
-        return false;
+        ArrayList<Booking> bookings = new ArrayList<Booking>(r.getResultList());
+//        if(bookings==null || bookings.isEmpty()) return true;
+//        return false;
+        return (bookings==null || bookings.isEmpty());
     }
     public static ArrayList<ItemLine> getInvoiceByUsername(String username)
     {
@@ -100,48 +103,108 @@ public class InvoiceDataBase {
             return true;
         }
     }
-    public static boolean setInvoiceStatusToPaid(int id)
+    //New====================================================================================
+    public static boolean addBooking(Booking booking)
     {
-        return true;
-//        EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
-//        EntityTransaction trans = em.getTransaction();
-//        Invoice invoice = InvoiceDataBase.getInvoiceByID(id);
-//        if(invoice == null) return false;
-//        if(LocalDate.now().isBefore(invoice.getDateIn())) return removeInvoiceByID(id);
-//
-////        invoice.setDateOut(LocalDate.now());
-//        invoice.setStatus((byte)0);
-//        try
-//        {
-//            trans.begin();
-//            em.merge(invoice);
-//            trans.commit();
-//        }
-//        catch (Exception ex)
-//        {
-//            trans.rollback();
-//            return false;
-//        }
-//        finally {
-//            em.close();
-//            return true;
-//        }
-    }
-    public static Invoice getInvoiceByID(int id)
-    {
-        Invoice invoice = new Invoice();
         EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
-        try
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.persist(booking);
+            trans.commit();
+        }
+        catch(Exception ex)
         {
-            invoice = em.find(Invoice.class,id);
+            trans.rollback();
+            return false;
         }
         finally {
             em.close();
-            return invoice;
+            return true;
         }
     }
-    public static boolean addToPurchaseHistory(int id)
+    public static ArrayList<Booking> getAllBookingByUserName(String username)
     {
-        return true;
+        ArrayList<Booking> booking = new ArrayList<Booking>();
+        EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        String query = "SELECT i FROM Booking i " +
+                "WHERE i.username = ?1 ";
+        TypedQuery<Booking> r = em.createQuery(query,Booking.class);
+        r.setParameter(1,username);
+        booking = new ArrayList<Booking>(r.getResultList());
+        for(int i =0;i<booking.size();i++)
+        {
+            Booking b = booking.get(i);
+            booking.get(i).Innit(b.getUsername(),b.getRoomNumber(),b.getDatein(),b.getDateout());
+        }
+        return booking;
+    }
+    public static boolean addToPurchaseHistory(Booking booking)
+    {
+        PurchaseHistory ph = new PurchaseHistory(booking);
+
+        if(!removeBooking(booking.getID())) return false;
+        //Price <= 0 only if the user have not used to service yet, therefore, no need to add
+        if(ph.getPrice()>0)
+        {
+            EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
+            EntityTransaction trans = em.getTransaction();
+            try {
+                trans.begin();
+                em.persist(ph);
+                trans.commit();
+            }
+            catch(Exception ex)
+            {
+                trans.rollback();
+                return false;
+            }
+            finally {
+                em.close();
+                return true;
+            }
+        }
+        else return true;
+    }
+    public static boolean removeBooking(int id)
+    {
+        EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        String query = "delete FROM Booking i " +
+                "WHERE i.ID = ?1 ";
+        Query r = em.createQuery(query);
+        r.setParameter(1,id);
+        try
+        {
+            trans.begin();
+            r.executeUpdate();
+            trans.commit();
+        }
+        catch(Exception ex)
+        {
+            trans.rollback();
+            return false;
+        }
+        finally {
+            em.close();
+            return true;
+        }
+    }
+    public static ArrayList<PurchaseHistory> getPurchaseHistoryByUsername(String username)
+    {
+        ArrayList<PurchaseHistory> booking = new ArrayList<PurchaseHistory>();
+        EntityManager em = DBUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        String query = "SELECT i FROM PurchaseHistory i " +
+                "WHERE i.username = ?1 ";
+        TypedQuery<PurchaseHistory> r = em.createQuery(query,PurchaseHistory.class);
+        r.setParameter(1,username);
+        booking = new ArrayList<PurchaseHistory>(r.getResultList());
+        for(int i=0;i<booking.size();i++)
+        {
+            booking.get(i).Init();
+        }
+        return booking;
     }
 }

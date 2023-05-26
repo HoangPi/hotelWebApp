@@ -8,13 +8,6 @@ import jakarta.persistence.EntityTransaction;
 import java.sql.*;
 
 public class UserDatabase {
-//    private static String dbURL = "jdbc:mysql://localhost:3306/hotel";
-//    private static String dbUsername = "root";
-//    private static String dbPassword = "Hoangphi09#";
-
-    private static String dbURL = "jdbc:mysql://localhost:3306/hotel";
-    private static String dbUsername = "root";
-    private static String dbPassword = "Hoangphi09#";
 
     //Log In===================================================================================
     public static User checkLogIn(String username, String password) throws SQLException, ClassNotFoundException {

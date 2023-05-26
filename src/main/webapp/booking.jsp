@@ -70,7 +70,7 @@
 </nav>
 <%--End nav--%>
 <section class="ftco-section">
-    <form class="mainform" action="Booking" method="post" class="probootstrap-form probootstrap-form-box mb60">
+    <form class="mainform" action="BookingControl" method="post" class="probootstrap-form probootstrap-form-box mb60">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-4">

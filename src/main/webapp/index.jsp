@@ -102,6 +102,9 @@
                             <a href="PersonalInfo">Personal Information</a>
                         </li>
                         <li>
+                            <a href="PurchaseHistoryControl">Purchase History</a>
+                        </li>
+                        <li>
                             <a href="LogOut">Log Out</a>
                         </li>
                     </ul>
@@ -151,13 +154,13 @@
             <div class="col-md">
                 <h2 class="heading mb-2 display-4 font-light probootstrap-animate"><img id ="displayImage" style = "width: 420px; height: 240px;" src="assets/images/type1.png" alt=""></h2>
                 <p class="lead mb-5 probootstrap-animate">Hope u like it! another free template by <a href="https://uicookies.com/" target="_blank">uicookies.com</a> Under License <a href="https://uicookies.com/license" target="_blank">CC 3.0</a></p>
-                <p class="probootstrap-animate">
-                    <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">See OnePage Verion</a>
-                </p>
+<%--                <p class="probootstrap-animate">--%>
+<%--                    <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">See OnePage Verion</a>--%>
+<%--                </p>--%>
             </div>
 
             <div class="col-md probootstrap-animate">
-                <form action="Booking" method="get" class="probootstrap-form">
+                <form action="BookingControl" method="get" class="probootstrap-form">
                     <div class="form-group">
                         <div class="row mb-3">
                             <div class="col-md">
@@ -209,10 +212,10 @@
                         </div>
                         <!-- END row -->
                         <div class="row">
-                            <div class="col-md">
-                                <label for="round" class="mr-5"><input type="radio" id="round" name="direction">  Round</label>
-                                <label for="oneway"><input type="radio" id="oneway" name="direction">  Oneway</label>
-                            </div>
+<%--                            <div class="col-md">--%>
+<%--                                <label for="round" class="mr-5"><input type="radio" id="round" name="direction">  Round</label>--%>
+<%--                                <label for="oneway"><input type="radio" id="oneway" name="direction">  Oneway</label>--%>
+<%--                            </div>--%>
                             <div class="col-md">
                                 <input type="submit" value="Submit" class="btn btn-primary btn-block">
                             </div>
